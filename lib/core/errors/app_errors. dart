@@ -1,0 +1,31 @@
+abstract class AppError {
+  final String userMessageAr;
+  final String debugMessage;
+  final String code;
+
+  const AppError({
+    required this.userMessageAr,
+    required this.debugMessage,
+    required this.code,
+  });
+}
+
+class ValidationError extends AppError {
+  const ValidationError({required super.userMessageAr, required super.debugMessage, super.code = 'VALIDATION_ERROR'});
+}
+
+class BusinessRuleError extends AppError {
+  const BusinessRuleError({required super.userMessageAr, required super.debugMessage, super.code = 'BUSINESS_RULE_ERROR'});
+}
+
+class StorageError extends AppError {
+  const StorageError({required super.userMessageAr, required super.debugMessage, super.code = 'STORAGE_ERROR'});
+}
+
+class NotFoundError extends AppError {
+  const NotFoundError({required super.userMessageAr, required super.debugMessage, super.code = 'NOT_FOUND_ERROR'});
+}
+
+class UnexpectedError extends AppError {
+  const UnexpectedError({required super.userMessageAr, required super.debugMessage, super.code = 'UNEXPECTED_ERROR'});
+}

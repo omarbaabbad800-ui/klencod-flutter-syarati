@@ -1,0 +1,12 @@
+class PricingCalculator {
+  static double calculateTotal({
+    required double dailyPrice,
+    required double deposit,
+    required DateTime pickup,
+    required DateTime returnDate,
+  }) {
+    final duration = returnDate.difference(pickup).inDays;
+    final days = duration <= 0 ? 1 : duration;
+    return (days * dailyPrice) + deposit;
+  }
+}

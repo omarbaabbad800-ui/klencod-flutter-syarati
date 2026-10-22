@@ -1,0 +1,26 @@
+import 'package:equatable/equatable.dart';
+
+class Vehicle extends Equatable {
+  final String id;
+  final String make;
+  final String model;
+  final int year;
+  final double dailyPrice;
+  final String city;
+  final int seats;
+  final bool isActive;
+
+  const Vehicle({
+    required this.id,
+    required this.make,
+    required this.model,
+    required this.year,
+    required this.dailyPrice,
+    required this.city,
+    required this.seats,
+    this.isActive = true,
+  });
+
+  @override
+  List<Object?> get props => [id, make, model, year, dailyPrice, city, seats, isActive];
+}

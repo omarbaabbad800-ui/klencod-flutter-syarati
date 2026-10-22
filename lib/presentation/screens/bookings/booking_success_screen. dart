@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+class BookingSuccessScreen extends StatelessWidget {
+  final String reference;
+  const BookingSuccessScreen({super.key, required this.reference});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('تم الحجز')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.check_circle, color: Colors.green, size: 80),
+            const SizedBox(height: 20),
+            Text('رقم الحجز: $reference', style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () => context.go('/'),
+              child: const Text('العودة للرئيسية'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

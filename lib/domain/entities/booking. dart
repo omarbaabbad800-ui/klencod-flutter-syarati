@@ -1,0 +1,26 @@
+import 'package:equatable/equatable.dart';
+
+enum BookingStatus { pending, confirmed, active, completed, cancelled }
+
+class Booking extends Equatable {
+  final String id;
+  final String reference;
+  final String vehicleId;
+  final DateTime pickupAt;
+  final DateTime returnAt;
+  final BookingStatus status;
+  final double totalPrice;
+
+  const Booking({
+    required this.id,
+    required this.reference,
+    required this.vehicleId,
+    required this.pickupAt,
+    required this.returnAt,
+    required this.status,
+    required this.totalPrice,
+  });
+
+  @override
+  List<Object?> get props => [id, reference, vehicleId, pickupAt, returnAt, status, totalPrice];
+}

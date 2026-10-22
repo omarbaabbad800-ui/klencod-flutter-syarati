@@ -1,0 +1,34 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('حسابي')),
+      body: ListView(
+        children: [
+          const ListTile(title: Text('المستخدم التجريبي'), subtitle: Text('user@example.com')),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.info),
+            title: const Text('الأسئلة الشائعة'),
+            onTap: () => context.push('/faq'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.privacy_tip),
+            title: const Text('سياسة الخصوصية'),
+            onTap: () => context.push('/privacy'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.business),
+            title: const Text('دخول كمدير مكتب (تجريبي)'),
+            onTap: () => context.push('/office/dashboard'),
+          ),
+        ],
+      ),
+    );
+  }
+}

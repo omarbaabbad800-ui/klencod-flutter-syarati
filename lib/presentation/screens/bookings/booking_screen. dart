@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+class BookingScreen extends StatelessWidget {
+  final String vehicleId;
+  const BookingScreen({super.key, required this.vehicleId});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('حجز السيارة')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('اختر التواريخ لحساب السعر'),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => context.push('/booking-success?ref=SYR-12345'),
+              child: const Text('تأكيد الحجز'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

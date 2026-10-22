@@ -1,0 +1,7 @@
+import 'package:fpdart/fpdart.dart';
+import '../../core/errors/app_error.dart';
+import '../../domain/entities/vehicle.dart';
+
+abstract class VehicleRepository {
+  Future<Either<AppError, List<Vehicle>>> getVehicles();
+}

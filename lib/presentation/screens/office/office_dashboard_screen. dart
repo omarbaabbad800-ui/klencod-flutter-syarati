@@ -1,0 +1,15 @@
+import 'package:flutter/material.dart';
+
+class OfficeDashboardScreen extends StatelessWidget {
+  const OfficeDashboardScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('لوحة تحكم المكتب')),
+      body: const Center(
+        child: Text('وضع تجريبي — صلاحيات مدير المكتب للتجربة فقط'),
+      ),
+    );
+  }
+}

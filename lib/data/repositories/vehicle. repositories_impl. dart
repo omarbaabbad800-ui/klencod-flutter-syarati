@@ -1,0 +1,20 @@
+import 'package:fpdart/fpdart.dart';
+import 'package:hive_ce/hive.dart';
+import '../../core/errors/app_error.dart';
+import '../../domain/entities/vehicle.dart';
+import '../datasources/local/hive_setup.dart';
+import '../models/vehicle_model.dart';
+import 'vehicle_repository.dart';
+
+class VehicleRepositoryImpl implements VehicleRepository {
+  @override
+  Future<Either<AppError, List<Vehicle>>> getVehicles() async {
+    try {
+      final box = Hive.box(HiveSetup.vehiclesBox);
+      final vehicles = box.values.map((e) => VehicleModel.fromJson(e)).toList();
+      return Right(vehicles);
+    } catch (e) {
+      return Left(StorageError(userMessageAr: 'تعذر جلب السيارات', debugMessage: e.toString()));
+    }
+  }
+}

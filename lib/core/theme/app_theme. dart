@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'app_colors.dart';
+
+class AppTheme {
+  static ThemeData get lightTheme {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.light,
+      scaffoldBackgroundColor: AppColors.surfaceLight,
+      colorScheme: const ColorScheme.light(
+        primary: AppColors.primaryNavy,
+        secondary: AppColors.accentBlue,
+        surface: AppColors.surfaceLight,
+      ),
+      textTheme: GoogleFonts.cairoTextTheme(),
+    );
+  }
+
+  static ThemeData get darkTheme {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      scaffoldBackgroundColor: AppColors.surfaceDark,
+      colorScheme: const ColorScheme.dark(
+        primary: AppColors.accentBlue,
+        secondary: AppColors.warmGold,
+        surface: AppColors.surfaceDark,
+      ),
+      textTheme: GoogleFonts.cairoTextTheme(ThemeData.dark().textTheme),
+    );
+  }
+}

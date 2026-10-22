@@ -1,0 +1,14 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../data/repositories/vehicle_repository.dart';
+import '../../data/repositories/vehicle_repository_impl.dart';
+import '../../domain/entities/vehicle.dart';
+
+final vehicleRepositoryProvider = Provider<VehicleRepository>((ref) {
+  return VehicleRepositoryImpl();
+});
+
+final vehiclesProvider = FutureProvider<List<Vehicle>>((ref) async {
+  final repo = ref.watch(vehicleRepositoryProvider);
+  final result = await repo.getVehicles();
+  return result.fold((l) => throw Exception(l.userMessageAr), (r) => r);
+});

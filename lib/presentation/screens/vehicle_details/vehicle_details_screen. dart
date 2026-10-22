@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+class VehicleDetailsScreen extends StatelessWidget {
+  final String vehicleId;
+  const VehicleDetailsScreen({super.key, required this.vehicleId});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('تفاصيل السيارة')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('معرف السيارة: $vehicleId'),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => context.push('/booking/$vehicleId'),
+              child: const Text('احجز الآن'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

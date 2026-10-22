@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../presentation/screens/home/home_screen.dart';
+import '../presentation/screens/discovery/discovery_screen.dart';
+import '../presentation/screens/bookings/bookings_screen.dart';
+import '../presentation/screens/profile/profile_screen.dart';
+import '../presentation/screens/vehicle_details/vehicle_details_screen.dart';
+import '../presentation/screens/booking/booking_screen.dart';
+import '../presentation/screens/booking/booking_success_screen.dart';
+import '../presentation/screens/office/office_dashboard_screen.dart';
+import '../presentation/screens/profile/privacy_screen.dart';
+import '../presentation/screens/profile/faq_screen.dart';
+
+class AppRouter {
+  static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
+
+  static final GoRouter router = GoRouter(
+    navigatorKey: rootNavigatorKey,
+    initialLocation: '/',
+    routes: [
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return Scaffold(
+            body: navigationShell,
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: navigationShell.currentIndex,
+              onTap: (index) => navigationShell.goBranch(index),
+              items: const [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'الرئيسية'),
+                BottomNavigationBarItem(icon: Icon(Icons.search), label: 'استكشاف'),
+                BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: 'حجوزاتي'),
+                BottomNavigationBarItem(icon: Icon(Icons.person), label: 'حسابي'),
+              ],
+            ),
+          );
+        },
+        branches: [
+          StatefulShellBranch(routes: [GoRoute(path: '/', builder: (c, s) => const HomeScreen())]),
+          StatefulShellBranch(routes: [GoRoute(path: '/discovery', builder: (c, s) => const DiscoveryScreen())]),
+          StatefulShellBranch(routes: [GoRoute(path: '/bookings', builder: (c, s) => const BookingsScreen())]),
+          StatefulShellBranch(routes: [GoRoute(path: '/profile', builder: (c, s) => const ProfileScreen())]),
+        ],
+      ),
+      GoRoute(
+        path: '/vehicle-details/:id',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => VehicleDetailsScreen(vehicleId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: '/booking/:id',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => BookingScreen(vehicleId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: '/booking-success',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => BookingSuccessScreen(reference: state.uri.queryParameters['ref'] ?? ''),
+      ),
+      GoRoute(
+        path: '/office/dashboard',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const OfficeDashboardScreen(),
+      ),
+      GoRoute(
+        path: '/faq',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const FaqScreen(),
+      ),
+      GoRoute(
+        path: '/privacy',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const PrivacyPolicyScreen(),
+      ),
+    ],
+  );
+}

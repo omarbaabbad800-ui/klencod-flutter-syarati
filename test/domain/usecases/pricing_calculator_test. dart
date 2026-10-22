@@ -1,0 +1,26 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:syarati/domain/usecases/pricing_calculator.dart';
+
+void main() {
+  group('PricingCalculator Tests', () {
+    test('يحسب السعر الإجمالي لـ 3 أيام بشكل صحيح', () {
+      final total = PricingCalculator.calculateTotal(
+        dailyPrice: 100.0,
+        deposit: 50.0,
+        pickup: DateTime(2024, 1, 1),
+        returnDate: DateTime(2024, 1, 4),
+      );
+      expect(total, 350.0);
+    });
+
+    test('يحسب الحد الأدنى ليوم واحد إذا كانت التواريخ متساوية', () {
+      final total = PricingCalculator.calculateTotal(
+        dailyPrice: 100.0,
+        deposit: 50.0,
+        pickup: DateTime(2024, 1, 1),
+        returnDate: DateTime(2024, 1, 1),
+      );
+      expect(total, 150.0);
+    });
+  });
+}
